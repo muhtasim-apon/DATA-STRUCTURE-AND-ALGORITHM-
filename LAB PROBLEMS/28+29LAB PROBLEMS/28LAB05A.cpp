@@ -20,27 +20,38 @@
 // 3 2 0
 // 3 1 0
 // 2 1 0
-#include <bits/stdc++.h>
-using namespace std;
+#include <stdio.h>
+
 int n, k;
-void backtrack(int start, vector<int> &comb) {
-    if (comb.size() == k) {
-        for (int i = 0; i < k; i++) {
-            cout << comb[i] << (i == k - 1 ? "\n" : " ");
+int comb[20];      // Array to store current combination (max n=15)
+int size_comb = 0; // Current size of combination
+
+void backtrack(int start)
+{
+    if (size_comb == k)
+    {
+        for (int i = 0; i < k; i++)
+        {
+            printf("%d", comb[i]);
+            if (i != k - 1)
+                printf(" ");
         }
+        printf("\n");
         return;
     }
-    for (int i = start; i >= 0; i--) {
-        comb.push_back(i);
-        backtrack(i - 1, comb);
-        comb.pop_back();
+    for (int i = start; i >= 0; i--)
+    {
+        comb[size_comb] = i;
+        size_comb++;
+        backtrack(i - 1);
+        size_comb--;
     }
 }
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cin >> n >> k;
-    vector<int> comb;
-    backtrack(n - 1, comb);
+
+int main()
+{
+    scanf("%d", &n);
+    scanf("%d", &k);
+    backtrack(n - 1);
     return 0;
 }

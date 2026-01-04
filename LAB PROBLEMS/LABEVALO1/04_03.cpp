@@ -1,123 +1,80 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<iostream>
+#include <bits/stdc++.h>
 using namespace std;
-struct node{
-    int data;
-    struct node *next;
-};
-struct node *head=NULL;
-void insertfirst(int x){
-    struct node *newnode=(struct node*)malloc(sizeof(struct node));
-    newnode->data=x;
-    newnode->next=NULL;
-    if(head==NULL)
-    {
-        head=newnode;
-        return;
-    }
-    newnode->next=head;
-    head=newnode;
-}
-void push(int x)
-{
-    struct node *newnode=(struct node*)malloc(sizeof(struct node));
-    newnode->data=x;
-    newnode->next=NULL;
-    if(head==NULL)
-    {
-        head=newnode;
-        return;
-    }
-    struct node *temp=head;
-    while(temp->next!=NULL)
-    {
-        temp=temp->next;
-    }
-    temp->next=newnode;
-    return;
-}
-void display()
-{
-    struct node *temp=head;
-    while(temp!=NULL)
-    {
-        printf("%d\n",temp->data);
-        temp=temp->next;
-    }
-}
-struct queue
-{
-    int data;
-    struct queue *next;
-    struct queue *prev;
-};
-struct queue *front = NULL;
-struct queue *rear = NULL;
 
-bool isEmpty()
-{
-    if (front == NULL)
-        return true;
-    return false;
-}
-void enqueue(int val)
-{
-    struct queue *newnode = (struct queue *)malloc(sizeof(struct queue));
-    newnode->data = val;
-    newnode->prev = rear;
-    newnode->next = NULL;
-    if (rear == NULL)
-    {
-        front = rear = newnode;
-    }
-    else
-    {
-        rear->next = newnode;
-        rear = newnode;
-    }
-}
-
-int dequeue()
-{
-    if (isEmpty())
-        return -1;
-    struct queue *temp = front;
-    front = front->next;
-    int removed = temp->data;
-    free(temp);
-    return removed;
-}
-
-int getfront()
-{
-    if (isEmpty())
-        return -1;
-    return front->data;
-}
-int getback()
-{
-
-    if (isEmpty())
-        return -1;
-    return rear->data;
-}
-
-void sortarray(struct Node* head)
-{
-    int count=0;
-    
-     
-}
 int main()
 {
-    int n;
-    cin>>n;
-    for(int i=0;i<n;i++)push(i);
-    for(int i=0;i<n;i++)
-    {
-        enqueue(i);
-    }
-    return 0;
+    int N;
+    cin >> N;
+    stack<int> S;
+    queue<int> Q;
+    int ops = 0;
 
+    vector<int> input(N);
+    for (int i = 0; i < N; i++)
+        cin >> input[i];
+
+    // Push input into stack (bottom to top)
+    for (int i = 0; i < N; i++)
+    {
+        S.push(input[i]);
+        ops++; // push
+    }
+
+    // Sort stack using queue
+    for (int sorted = 0; sorted < N; sorted++)
+    {
+        int size = S.size();
+        int minVal = INT_MAX;
+
+        // Move all elements from stack to queue, find min
+        for (int i = 0; i < size; i++)
+        {
+            int val = S.top();
+            S.pop();
+            ops++; // pop
+            Q.push(val);
+            ops++; // enqueue
+            if (val < minVal)
+                minVal = val;
+        }
+
+        // Move back all elements except min
+        int qSize = Q.size();
+        bool minUsed = false;
+        for (int i = 0; i < qSize; i++)
+        {
+            int val = Q.front();
+            Q.pop();
+            ops++; // dequeue
+            if (val == minVal && !minUsed)
+            {
+                // This will go to stack later
+                minUsed = true;
+                continue;
+            }
+            S.push(val);
+            ops++; // push
+        }
+
+        // Push the min to stack (smallest goes on top)
+        S.push(minVal);
+        ops++;
+    }
+
+    // Print stack from bottom to top
+    vector<int> out;
+    while (!S.empty())
+    {
+        out.push_back(S.top());
+        S.pop();
+        ops++;
+    }
+    reverse(out.begin(), out.end());
+    for (int i = 0; i < N; i++)
+        cout << out[i] << (i == N - 1 ? "\n" : " ");
+
+    // Print total operations
+    cout << ops << "\n";
+
+    return 0;
 }

@@ -28,45 +28,46 @@
 // 1 2 1
 // 1 0 3
 // 1 0 1
-#include <bits/stdc++.h>
-using namespace std;
-int n,m;
-void generatelist(vector<int>&a,int idx,int n)
+#include <stdio.h>
+
+int n, m;
+int a[15]; // Array to store current combination (max n=10)
+
+void generatelist(int idx, int n)
 {
-    if(idx==n)
+    if (idx == n)
     {
-        for(int i=0;i<n;i++)
+        for (int i = 0; i < n; i++)
         {
-            if(i)cout<<" ";
-            cout<<a[i];
+            if (i)
+                printf(" ");
+            printf("%d", a[i]);
         }
-        cout<<"\n";
+        printf("\n");
         return;
     }
-    if(idx%2==0)
+    if (idx % 2 == 0) // Even index -> odd digit (descending)
     {
-        for(int i=m;i>=0;i-=2)
+        for (int i = m; i >= 0; i -= 2)
         {
-            a[idx]=i;
-            generatelist(a,idx+1,n);
+            a[idx] = i;
+            generatelist(idx + 1, n);
         }
     }
-    else
+    else // Odd index -> even digit (descending)
     {
-        for(int i=m-1;i>=0;i-=2)
+        for (int i = m - 1; i >= 0; i -= 2)
         {
-            a[idx]=i;
-            generatelist(a,idx+1,n);
+            a[idx] = i;
+            generatelist(idx + 1, n);
         }
     }
 }
+
 int main()
 {
-    ios::sync_with_stdio(0);
-    cin.tie(0);
-    cin>>n;
-    m=4;
-    vector<int>a(n);
-    generatelist(a,0,n);
+    scanf("%d", &n);
+    m = 4;
+    generatelist(0, n);
     return 0;
 }
