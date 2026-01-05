@@ -1,0 +1,1 @@
+{"name":"Local: prlmB","url":"c:\\dsa\\LAB PROBLEMS\\LabEvalFinal\\prlmB.cpp","tests":[{"id":1767516557846,"input":"5 3\n4 10 2 8 6","output":"1 2 3 4 5"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\dsa\\LAB PROBLEMS\\LabEvalFinal\\prlmB.cpp","group":"local","local":true}

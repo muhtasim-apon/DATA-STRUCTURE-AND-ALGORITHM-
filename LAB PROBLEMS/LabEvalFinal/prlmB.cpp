@@ -41,11 +41,6 @@ void insert(int key)
     up(arr.size() - 1);
 }
 
-int maxval()
-{
-    return arr[0];
-}
-
 int extract()
 {
     int root = arr[0];
@@ -55,24 +50,12 @@ int extract()
     return root;
 }
 
-void buildMaxHeap(vector<int> &arr)
-{
-    arr = arr;
-    for (int i = arr.size() / 2 - 1; i >= 0; i--)
-        heapify(i);
-}
+// void build(vector<int> &arr)
+// {
 
-vector<int> heapSortDesc()
-{
-    vector<int> backup = arr;
-    vector<int> sorted;
-
-    while (!arr.empty())
-        sorted.push_back(extract());
-
-    arr = backup;
-    return sorted;
-}
+//     for (int i = arr.size() / 2 - 1; i >= 0; i--)
+//         heapify(i);
+// }
 
 int main()
 {
@@ -83,5 +66,19 @@ int main()
         int x;
         scanf("%d", &x);
         insert(x);
+        arr[0] -= k;
+        heapify(0);
     }
+    vector<int> ans;
+    while (!arr.empty())
+    {
+        ans.push_back(extract());
+    }
+    reverse(ans.begin(), ans.end());
+    for (int i = 0; i < ans.size() - 1; i++)
+    {
+        printf("%d ", ans[i]);
+    }
+    printf("%d", ans.back());
+    printf("\n");
 }
