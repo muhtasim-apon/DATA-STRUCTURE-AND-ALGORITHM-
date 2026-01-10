@@ -1,10 +1,3 @@
-/*
- * @lc app=leetcode id=235 lang=cpp
- *
- * [235] Lowest Common Ancestor of a Binary Search Tree
- */
-
-// @lc code=start
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -14,12 +7,25 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
-
-class Solution {
+class Solution
+{
 public:
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        
+    // map<TreeNode*,TreeNode*>parent;
+    // set<TreeNode*>path1;
+    // queue<TreeNode*>lvl;
+    TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+    {
+        if (!root)
+            return NULL;
+        while (root)
+        {
+            if (root->val > p->val && root->val > q->val)
+                root = root->left;
+            else if (root->val < p->val && root->val < q->val)
+                root = root->right;
+            else
+                return root;
+        }
+        return NULL;
     }
 };
-// @lc code=end
-
