@@ -1,0 +1,1 @@
+{"name":"Local: 29C","url":"c:\\dsa\\Graph\\CF\\29C.cpp","tests":[{"id":1773402784683,"input":"2\n1 100\n100 2\n","output":"2 100 1 "},{"id":1773403132534,"input":"3\n3 1\n100 2\n3 2\n","output":"100 2 3 1 "}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\dsa\\Graph\\CF\\29C.cpp","group":"local","local":true}
