@@ -1,0 +1,1 @@
+{"name":"Local: 813C","url":"c:\\dsa\\Graph\\CF\\813C.cpp","tests":[{"id":1773487588841,"input":"4 3\n1 2\n2 3\n2 4\n","output":"4\n"},{"id":1773487807756,"input":"5 2\n1 2\n2 3\n3 4\n2 5\n","output":"6\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\dsa\\Graph\\CF\\813C.cpp","group":"local","local":true}
